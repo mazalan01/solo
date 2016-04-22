@@ -29,9 +29,8 @@ public class Main {
     }
     public static void main(String[] args){
         List<Display> players=new ArrayList<Display>();
-        players.add(new interKonzol());
         players.add(new interAI());
-        players.add(new interAI2());
+        players.add(new interGrafik());
         Game game=new Game(players);
         boolean win=false;
         while(!win)
@@ -40,7 +39,6 @@ public class Main {
             win=game.checkWin();
             game.nextPlayer();
         }
-        System.out.println("Someone won!");
         /*setColours(colours);
         Table table=new Table();
         List<Player> players=new ArrayList<Player>();

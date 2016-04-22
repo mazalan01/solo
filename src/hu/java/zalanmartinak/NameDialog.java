@@ -3,23 +3,28 @@ package hu.java.zalanmartinak;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class GraphicWindow extends JDialog {
+public class NameDialog extends JDialog {
     private JPanel contentPane;
-    private JButton button1;
-    private JLabel playersLable;
-    private JPanel ownCards;
-    private JLabel topCard;
     private JButton buttonOK;
     private JButton buttonCancel;
     private JTextField textField1;
-    private JLabel lable;
-
-    public GraphicWindow() {
+    public boolean isDone=false;
+    public NameDialog() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
+        buttonOK.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onOK();
+            }
+        });
 
+        buttonCancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        });
 
 // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -35,40 +40,24 @@ public class GraphicWindow extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
     }
 
     private void onOK() {
 // add your code here
-
+        isDone=true;
+        dispose();
     }
-
+    public String getPlayerName()
+    {
+        return textField1.getText();
+    }
     private void onCancel() {
 // add your code here if necessary
         dispose();
     }
 
-    public void setTable(String s)
-    {
-        playersLable.setText(s);
-    }
-    public void setTopCard(String s)
-    {
-        topCard.setText(s);
-
-    }
-
-    public JPanel getOwnCards()
-    {
-        return ownCards;
-    }
-    public static void main() {
-        GraphicWindow dialog = new GraphicWindow();
+    public static void main(String[] args) {
+        NameDialog dialog = new NameDialog();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

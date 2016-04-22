@@ -35,7 +35,14 @@ public class Game {
     }
     public boolean checkWin()
     {
-        return currentPlayer.deck.size()==0;
+        boolean b=currentPlayer.deck.size()==0;
+        if (b) {
+            for (Player p:players
+                 ) {
+                    p.inter.showalert(currentPlayer.name+" won!");
+            }
+        }
+        return b;
     }
     public void step()
     {
@@ -56,8 +63,8 @@ public class Game {
         for (Player p:players
              ) {
             p.inter.showTable(cardNumbers,players.indexOf(p),names);
-            //p.inter.showTopCard(table.getLastCard());
-            //p.inter.showCards(p.deck);
+            p.inter.showTopCard(table.getLastCard());
+            p.inter.showCards(p.deck);
         }
         List<Integer> selectable=new ArrayList<Integer>();
         selectable.add(-1);
