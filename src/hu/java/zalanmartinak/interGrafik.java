@@ -1,11 +1,13 @@
 package hu.java.zalanmartinak;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+//
 
 /**
  * Created by MZ on 2016.04.09..
@@ -61,6 +63,7 @@ public class interGrafik implements Display {
                 JButton b=new JButton();
                 b.setText(c.getColour()+" "+c.getNumber());
                 b.setEnabled(false);
+
                 b.addActionListener(e -> {
                     but= (JButton) e.getSource();
                     synchronized (cardButtons){
@@ -111,8 +114,30 @@ public class interGrafik implements Display {
 
     @Override
     public Colour chooseColour() {
-        return null;
+        //int choice = TaskDialogs.radioChoice("You've got selection to make", "Go ahead", 1, "Yes", "No", "May be" );
+        Object[] possibilities = {"green", "blue", "yellow", "red"};
+        String s = (String)JOptionPane.showInputDialog(
+                new Frame(),
+                "Choose a colour:\n","",
+                JOptionPane.PLAIN_MESSAGE, null,
+                possibilities,
+                "green");
+
+//If a string was returned, say so.
+        if ((s != null) && (s.length() > 0)) {
+           // setLabel("Green eggs and... " + s + "!");
+            if(s=="red")return Colour.red;
+            else if(s=="blue") return Colour.blue;
+            else if(s=="yellow") return Colour.yellow;
+
+        }
+        return Colour.green;
+//If you're here, the return value was null/empty.
+       //setLabel("Come on, finish the sentence!");
+        //return null;4
     }
+
+
     NameDialog name=new NameDialog();
     GraphicWindow thisWindow=new GraphicWindow();
 
@@ -130,6 +155,18 @@ public class interGrafik implements Display {
                 thisWindow.setVisible(true);
             }
         }.start();
+        thisWindow.getDrawButton().addActionListener(e -> {
+            but= (JButton) e.getSource();
+            synchronized (cardButtons){
+
+                cardButtons.notify();
+            }
+        });
+        thisWindow.getDrawButton().setPreferredSize(new Dimension(100,100));
+        thisWindow.getDrawButton().setSize(100,100);
+       // thisWindow.setResizable(false);
+        name.setModal(false);
         return a;
     }
 }
+

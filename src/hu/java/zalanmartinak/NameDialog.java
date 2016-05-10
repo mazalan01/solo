@@ -56,6 +56,7 @@ public class NameDialog extends JDialog {
         dispose();
     }
 
+
     public static void main(String[] args) {
         NameDialog dialog = new NameDialog();
         dialog.pack();

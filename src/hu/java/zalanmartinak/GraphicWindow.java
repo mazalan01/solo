@@ -9,6 +9,7 @@ public class GraphicWindow extends JDialog {
     private JLabel playersLable;
     private JPanel ownCards;
     private JLabel topCard;
+    private JPanel abc;
     private JButton buttonOK;
     private JButton buttonCancel;
     private JTextField textField1;
@@ -62,6 +63,15 @@ public class GraphicWindow extends JDialog {
         topCard.setText(s);
 
     }
+    public void seta()
+    {
+        abc.setSize(100,100);
+    }
+    public JButton getDrawButton()
+    {
+        return button1;
+    }
+
 
     public JPanel getOwnCards()
     {
